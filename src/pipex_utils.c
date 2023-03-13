@@ -6,11 +6,11 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/12 12:45:47 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:40:25 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	double_pointer_free(char **ptr)
 {

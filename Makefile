@@ -21,6 +21,8 @@ INC = ./includes/
 
 INC_BONUS = ./includes_bonus/
 
+DOT_O = _objFiles/
+
 LIBFT = ./libft/libft.a
 
 CC = gcc
@@ -34,6 +36,7 @@ SRCS = $(addprefix $(SRC_PATH), $(SRC))
 SRCS_BONUS = $(addprefix $(SRC_B_PATH), $(SRC_B))
 
 OBJS = $(SRCS:.c=.o)
+
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
@@ -42,7 +45,9 @@ bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS)
 	@make -C ./libft
+	@mkdir -p $(DOT_O)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@mv $(OBJS) $(DOT_O)
 	@echo "👍🏽pipex succesfully compiled!👍🏽"
 
 $(NAME_BONUS): $(OBJS_BONUS)
@@ -52,6 +57,7 @@ $(NAME_BONUS): $(OBJS_BONUS)
 
 clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -rf $(DOT_O)
 	@make clean -C ./libft
 
 fclean:

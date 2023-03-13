@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:57:33 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/12 11:50:29 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:41:24 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/wait.h>
-# include "../Libft/libft.h"
+# include "../libft/libft.h"
 # include <errno.h>
 
 # define ARG_ERROR  1
@@ -34,5 +34,6 @@ typedef struct s_pipe
 
 int main(int argc, char* argv[], char **env);
 void    exit_error(int err, char *msg, int errcode);
+void	double_pointer_free(char **ptr);
 
 #endif
