@@ -28,7 +28,7 @@ LIBFT = ./libft/libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I inc -I libft
 
-SRC = main.c \
+SRC = main.c pipex_utils.c\
 
 SRC _B = 
 
@@ -44,7 +44,7 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS)
-	@make -C ./libft
+	@make -sC ./libft
 	@mkdir -p $(DOT_O)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@mv $(OBJS) $(DOT_O)
@@ -60,7 +60,7 @@ clean:
 	@rm -rf $(DOT_O)
 	@make clean -C ./libft
 
-fclean:
+fclean: clean
 	@rm -f $(NAME) $(NAME_BONUS)
 	@make fclean -C ./libft
 

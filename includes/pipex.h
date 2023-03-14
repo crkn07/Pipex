@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:57:33 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/13 13:41:24 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:38:56 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,24 @@
 # include "../libft/libft.h"
 # include <errno.h>
 
-# define ARG_ERROR  1
+# define ARG_ERR 1
+# define PIPE_ERR 2
+# define FORK_ERR 3
+# define NO_INFILE 4
+# define NO_OUTFILE 5
+# define COM_ERR 6
 
 typedef struct s_pipe
 {
 	char	**path;
-	int		pipe_fds[2];
+	int		fd_pipe[2];
 	int		pid1;
 	int		pid2;
 	int		status;
 }	t_pipe;
 
-int main(int argc, char* argv[], char **env);
-void    exit_error(int err, char *msg, int errcode);
+int	main(int argc, char **argv, char **envp);
 void	double_pointer_free(char **ptr);
+void    exit_error(int err, char *msg, int errcode);
 
 #endif
