@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:57:33 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/14 10:38:56 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/15 12:40:27 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_pipe
 
 int	main(int argc, char **argv, char **envp);
 void	double_pointer_free(char **ptr);
+char    *checkaccess(char **path, char *command);
 void    exit_error(int err, char *msg, int errcode);
 
 #endif
