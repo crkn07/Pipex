@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 11:22:13 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:10:57 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	double_pointer_free(char **ptr)
 {
@@ -66,6 +66,8 @@ void	exit_error(int err, char *msg, int errnum)
 		msg = ft_strjoin(msg, ": no such file or directory");
 	else if (err == 6)
 		perror("command not found :");
+	else if (err == 7)
+		perror("here_doc error :");
 	free(msg);
 	exit (errnum);
 }

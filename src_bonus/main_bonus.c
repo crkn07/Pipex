@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 13:24:46 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:02:01 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 /**
  * It checks if the command is in the current directory, if it is, it returns the
@@ -195,5 +195,6 @@ int	main(int argc, char **argv, char **envp)
 	double_pointer_free(pipex.path);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, &pipex.status, 0);
+	//system("leaks pipex");
 	return (WEXITSTATUS(pipex.status));
 }

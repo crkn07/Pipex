@@ -3,102 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crtorres <crtorres@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/13 00:57:18 by jisokang          #+#    #+#             */
-/*   Updated: 2023/02/01 12:51:58 by crtorres         ###   ########.fr       */
+/*   Created: 2022/10/03 18:37:08 by crtorres          #+#    #+#             */
+/*   Updated: 2023/02/21 16:49:49 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//size_t	ft_strlen(const char *s)
-//{
-//	size_t i;
-
-//	i = 0;
-//	while (s[i] != '\0')
-//		i++;
-//	return (i);
-//}
-
-char	*ft_strdup_gnl(const char *s1)
+size_t	ft_strlengnl(char *str)
 {
-	char	*s2;
 	size_t	i;
-	size_t	len;
 
-	len = ft_strlen(s1);
-	if ((s2 = malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
-	{
-		s2[i] = s1[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return (s2);
-}
-
-size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	src_len;
-
-	if (dst == NULL || src == NULL)
+	if (!str)
 		return (0);
-	src_len = ft_strlen(src);
-	if (dstsize == 0)
-		return (src_len);
-	i = 0;
-	while (i < (dstsize - 1) && src[i] != '\0')
+	while (str[i] != '\0')
 	{
-		dst[i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (src_len);
+	return (i);
 }
 
-size_t	ft_strlcat_gnl(char *dst, const char *src, size_t dstsize)
+/**
+ * It takes two strings and joins them together.
+ * 
+ * @param s1 The first string to be joined.
+ * @param s2 The string to be appended to the end of s1.
+ * 
+ * @return A pointer to a new string that is the result of the 
+ * concatenation of s1 and s2.
+ */
+char	*ft_strjoingnl(char *s1, char *s2)
 {
-	size_t src_len;
-	size_t dst_len;
-	size_t i;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	src_len = ft_strlen(src);
-	dst_len = ft_strlen(dst);
-	if (dstsize < dst_len + 1)
-		return (dstsize + src_len);
-	i = 0;
-	while (src[i] != '\0' && dst_len + i + 1 < dstsize)
+	if (!s1)
 	{
-		dst[dst_len + i] = src[i];
-		i++;
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
 	}
-	dst[dst_len + i] = '\0';
-	return (dst_len + src_len);
-}
-
-char	*ft_strjoin_gnl(char *s1, char const *s2)
-{
-	char	*newstr;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	if (s1 == NULL && s2 == NULL)
+	if (!s1 || !s2)
 		return (NULL);
-	else if (s1 == NULL && s2 != NULL)
-		return (ft_strdup_gnl(s2));
-	else if (s1 != NULL && s2 == NULL)
-		return (ft_strdup_gnl(s1));
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	if ((newstr = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1))) == NULL)
+	str = malloc(sizeof(char) * (ft_strlengnl(s1) + ft_strlengnl(s2) + 1));
+	if (str == NULL)
 		return (NULL);
-	ft_strlcpy_gnl(newstr, s1, s1_len + 1);
+	i = -1;
+	j = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[ft_strlengnl(s1) + ft_strlengnl(s2)] = '\0';
 	free(s1);
-	ft_strlcat_gnl(newstr, s2, s1_len + s2_len + 1);
-	return (newstr);
+	return (str);
+}
+
+/**
+ * The function ft_strchr() locates the first occurrence of c (converted to 
+ * a char) in the string pointed to by str
+ * 
+ * @param str This is the string to be searched.
+ * @param c The character to search for.
+ * 
+ * @return A pointer to the first occurrence of the character c in the 
+ * string str.
+ */
+char	*ft_strchrgnl(char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	if (c == '\0')
+		return ((char *)&str[ft_strlengnl(str)]);
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char) c)
+			return ((char *)&str[i]);
+		i++;
+	}	
+	return (0);
 }

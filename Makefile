@@ -26,7 +26,7 @@ DOT_O = _objFiles/
 LIBFT = ./libft/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I inc -I libft
+CFLAGS = -Wall -Wextra -Werror -I inc -I libft -g3
 
 SRC = main.c pipex_utils.c\
 
@@ -35,13 +35,13 @@ SRC _B =
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 SRCS_BONUS = $(addprefix $(SRC_B_PATH), $(SRC_B))
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=%.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
-bonus: $(NAME_BONUS)
+##bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS)
 	@make -sC ./libft
@@ -50,10 +50,10 @@ $(NAME): $(OBJS)
 	@mv $(OBJS) $(DOT_O)
 	@echo "👍🏽pipex succesfully compiled!👍🏽"
 
-$(NAME_BONUS): $(OBJS_BONUS)
-	@make -C ./libft
-	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
-	@echo "👍🏾pipex_bonus succesfully compiled!👍🏾"
+##$(NAME_BONUS): $(OBJS_BONUS)
+##	@make -C ./libft
+##	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+##	@echo "👍🏾pipex_bonus succesfully compiled!👍🏾"
 
 clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)

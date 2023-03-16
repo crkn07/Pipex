@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:57:33 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 10:56:08 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:30:47 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -27,11 +27,14 @@
 # define NO_INFILE 4
 # define NO_OUTFILE 5
 # define COM_ERR 6
+# define ERR_HEREDOC 7
 
 typedef struct s_pipe
 {
 	char	**path;
 	int		fd_pipe[2];
+	int		infile;
+	int		outfile;
 	int		pid1;
 	int		pid2;
 	int		status;

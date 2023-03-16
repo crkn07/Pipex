@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:49:29 by cyacoub-          #+#    #+#             */
-/*   Updated: 2023/03/14 02:02:31 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:31:14 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	new_string = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
-	if (new_string == NULL)
+	if (!new_string)
 		return (NULL);
 	while (s1[i])
 	{

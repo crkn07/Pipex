@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crtorres <crtorres@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 20:24:43 by jisokang          #+#    #+#             */
-/*   Updated: 2023/02/02 17:16:52 by crtorres         ###   ########.fr       */
+/*   Created: 2022/10/03 18:37:34 by crtorres          #+#    #+#             */
+/*   Updated: 2023/02/21 16:45:29 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft.h"
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 32
-# endif
-
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE BUFSIZ
 # endif
 
-int		get_next_line(int fd, char **line);
-char	*ft_strjoin_gnl(char *s1, char const *s2);
-char	*ft_strdup_gnl(const char *s1);
-//size_t	ft_strlen_gnl(const char *s);
-size_t	t_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcat_gnl(char *dest, const char *src, size_t dstsize);
+# if BUFFER_SIZE > 9223372036854775806L /*Double long*/
+# endif
+
+# include "unistd.h"
+# include "stdlib.h"
+# include "fcntl.h"
+# include "stdio.h"
+
+char	*get_next_line(int fd);
+char	*ft_read_and_stash(int fd, char *stash);
+char	*ft_stash(char *stash);
+char	*ft_get_line(char *stash);
+size_t	ft_strlengnl(char *str);
+char	*ft_strjoingnl(char *s1, char *s2);
+char	*ft_strchrgnl(char *str, int c);
 
 #endif
