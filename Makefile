@@ -30,7 +30,7 @@ CFLAGS = -Wall -Wextra -Werror -I inc -I libft -g3
 
 SRC = main.c pipex_utils.c\
 
-SRC _B = 
+SRC _B = main_bonus.c \
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 SRCS_BONUS = $(addprefix $(SRC_B_PATH), $(SRC_B))

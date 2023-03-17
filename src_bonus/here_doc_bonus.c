@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:03:15 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 16:29:36 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:57:22 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ void	here_doc(char *argv, t_pipe pipex)
 	}
 	free (buf);
 	close(file);
+	pipex.fd_in = open(".heredoc_tmp", O_RDONLY);
+	if (pipex.fd_in < 0)
+	{
+		unlink(".heredoc_tmp");
+		exit_error(ERR_HEREDOC, argv, 1);
+	}
 }

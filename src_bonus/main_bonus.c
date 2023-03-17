@@ -6,16 +6,16 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 12:02:01 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:13:52 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
 /**
- * It checks if the command is in the current directory, if it is, it returns the
- * command, if it's not, it checks if the command is in the PATH, if it is, it
- * returns the command, if it's not, it exits with an error
+ * It checks if the command is in the current directory, if it is, it 
+ * returns the command, if it's not, it checks if the command is in the 
+ * PATH, if it is, it returns the command, if it's not, it exits with an error
  * 
  * @param path a double pointer to the path
  * @param cmd The command that the user entered.
@@ -162,8 +162,8 @@ char	**checkpath(char **envp)
 
 /**
  * It forks twice, the first child executes the first command, the second child
- * executes the second command, the parent waits for both children to finish and
- * returns the exit status of the second child
+ * executes the second command, the parent waits for both children to finish 
+ * and returns the exit status of the second child
  * 
  * @param argc the number of arguments passed to the program
  * @param argv the arguments passed to the program
