@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 13:24:46 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:03:25 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ int	main(int argc, char **argv, char **envp)
 	close(pipex.fd_pipe[0]);
 	close(pipex.fd_pipe[1]);
 	double_pointer_free(pipex.path);
-	waitpid(pipex.pid1, NULL, 0);
+	waitpid(pipex.pid1, &pipex.status, 0);
 	waitpid(pipex.pid2, &pipex.status, 0);
 	return (WEXITSTATUS(pipex.status));
 }
