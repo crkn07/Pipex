@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/22 18:06:55 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:24:05 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,6 @@ void	double_pointer_free(char **ptr)
 	}
 	free (ptr);
 }
-
-/* char	*checkcommand_in_path(char **path, char *command)
-{
-	char	*fcmd;
-	int		i;
-
-	i = 0;
-	while (path[i])
-	{
-		fcmd = ft_strjoin(path[i], command);
-		if (access(fcmd, X_OK) == 0)
-		{
-			double_pointer_free(path);
-			return (fcmd);
-		}
-		free (fcmd);
-		i++;
-	}
-	return (NULL);
-} */
 
 /**
  * It opens a file, and returns the file descriptor
