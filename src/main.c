@@ -6,16 +6,16 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/21 17:03:25 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:35:34 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
 /**
- * It checks if the command is in the current directory, if it is, it returns the
- * command, if it's not, it checks if the command is in the PATH, if it is, it
- * returns the command, if it's not, it exits with an error
+ * It checks if the command is in the current directory, if it is, it returns
+ * the command, if it's not, it checks if the command is in the PATH, if it 
+ * is, it returns the command, if it's not, it exits with an error
  * 
  * @param path a double pointer to the path
  * @param cmd The command that the user entered.
@@ -178,7 +178,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		exit_error(ARG_ERR, NULL, 1);
 	pipex.path = checkpath(envp);
-	if (pipe(pipex.fd_pipe) == 1)
+	if (pipe(pipex.fd_pipe) == -1)
 		exit_error(PIPE_ERR, NULL, errno);
 	pipex.pid1 = fork();
 	if (pipex.pid1 == -1)

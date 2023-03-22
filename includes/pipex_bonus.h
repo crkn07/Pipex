@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:57:33 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/17 17:01:51 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:52:38 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@
 # define COM_ERR 6
 # define ERR_HEREDOC 7
 
-
 typedef struct s_pipe
 {
 	char	**path;
 	char	**cmd;
-	char	*fcmd;
-	int		*fd_pipe;
-	int		*pid;
+	int		fd_pipe[2];
+	pid_t	*pid;
 	int		here_doc;
 	int		max_cmd;
 	int		pipe_nb;
@@ -52,6 +50,10 @@ typedef struct s_pipe
 int		main(int argc, char **argv, char **envp);
 void	double_pointer_free(char **ptr);
 char	*checkcommand_in_path(char **path, char *command);
+int		open_file(char *file, int type);
 void	exit_error(int err, char *msg, int errcode);
+void	exec(char *cmd, char **envp);
+void	here_doc(char **argv);
+char	*my_env(char *name, char **envp);
 
 #endif
