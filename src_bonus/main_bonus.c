@@ -6,13 +6,13 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/23 15:13:37 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:49:37 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-static void        system_exec(char *cmdtemplate)
+/* static void        system_exec(char *cmdtemplate)
  {
          FILE* fp = popen(cmdtemplate, "r");
          if (fp == NULL) {
@@ -36,7 +36,7 @@ static void exit_checks(void)
     sprintf(cmdtemplate, "leaks %d", getpid());
     system_exec(cmdtemplate);
     ft_putstr_fd("******************************************\n", 2);
- }
+ } */
 /**
  * It reads from stdin until it finds the delimiter, then it writes everything 
  * it read to the pipe
@@ -51,6 +51,7 @@ void	put_hdc(char **argv, int *pipe_fd)
 	close(pipe_fd[0]);
 	write(1, "pipe heredoc> ", 14);
 	buf = get_next_line(STDIN_FILENO);
+	ft_putstr_fd(buf, pipe_fd[1]);
 	while (buf)
 	{
 		if ((ft_strncmp(buf, argv[2], ft_strlen(argv[2])) == 0)
@@ -60,8 +61,8 @@ void	put_hdc(char **argv, int *pipe_fd)
 			exit(0);
 		}
 		write(1, "pipe heredoc> ", 14);
-		buf = get_next_line(STDIN_FILENO);
 		ft_putstr_fd(buf, pipe_fd[1]);
+		buf = get_next_line(STDIN_FILENO);
 	}
 	free(buf);
 }
@@ -128,7 +129,7 @@ int	main(int argc, char **argv, char **envp)
 	int		i;
 	t_pipe	pipex;
 
-	atexit(exit_checks);
+	//atexit(exit_checks);
 	if (argc < 5)
 		exit_error(ARG_ERR, NULL, 1);
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
