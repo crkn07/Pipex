@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/16 11:22:13 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:56:06 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void	exit_error(int err, char *msg, int errnum)
 		msg = ft_strjoin(msg, ": no such file or directory");
 	else if (err == 6)
 		perror("command not found :");
-	free(msg);
 	exit (errnum);
 }
