@@ -35,7 +35,7 @@ DOT_O = _objFiles/
 LIBFT = ./libft/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I inc -I libft
+CFLAGS = -Wall -Wextra -Werror -I inc -I libft -g -fsanitize=address
 
 SRC = main.c pipex_utils.c \
 
@@ -56,12 +56,13 @@ $(DOT_O):
 	@mkdir -p $(DOT_O)
 
 $(DOT_O)/%.o: $(SRC_PATH)/%.c | $(DOT_O)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
+	$(BLUE) "Compiling libft...\n" $(RESET)
 	@make -sC ./libft
+	$(BLUE) "Compiling...\n" $(RESET)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	clear
 	$(GREEN) "\n👍🏽pipex succesfully compiled!👍🏽\n " $(RESET)
 
 $(NAME_BONUS): $(OBJS_BONUS)
@@ -75,7 +76,7 @@ clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)
 	@rm -rf $(DOT_O)
 	$(PURPLE) CLEANING libft... $(RESET)
-	@make clean -C ./libft
+	@make fclean -C ./libft
 	$(GREEN) "CLEAN COMPLETE" $(RESET)
 
 fclean: clean

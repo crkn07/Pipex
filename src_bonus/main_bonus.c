@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/24 15:49:37 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:14:37 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,10 @@ int	main(int argc, char **argv, char **envp)
 	int		i;
 	t_pipe	pipex;
 
-	//atexit(exit_checks);
 	if (argc < 5)
 		exit_error(ARG_ERR, NULL, 1);
+	if ((ft_strlen(argv[argc - 2]) || ft_strlen(argv[argc - 3])) == '\0')
+		exit_error(COM_ERR, *argv, 127);
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
 		if (argc < 6)
