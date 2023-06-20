@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cyacoub- <cyacoub-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:31:17 by cyacoub-          #+#    #+#             */
-/*   Updated: 2023/03/28 17:41:26 by crtorres         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:52:31 by cyacoub-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,6 @@ static void	save_words(char **ptr, char *str, char c, int nwords)
 	}
 }
 
-/**
- * It splits a string into words, separated by a character.
- * 
- * @param s The string to be split.
- * @param c the character to split the string by
- * 
- * @return A pointer to an array of pointers to characters.
- */
 char	**ft_split(char const *s, char c)
 {
 	int		nwords;

@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/24 17:29:22 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:06:51 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,10 @@ int	open_file(char *file, int type)
 
 	if (type == 0)
 		fd_ret = open(file, O_RDONLY, 0644);
-		if (access(file, R_OK) < 0)
-			exit_error(NO_INFILE, file, errno);
 	if (type == 1)
 		fd_ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (type == 2)
 		fd_ret = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (access(file, W_OK | R_OK) < 0)
-			exit_error(NO_OUTFILE, file, errno);
 	if (fd_ret == -1)
 		exit(0);
 	return (fd_ret);

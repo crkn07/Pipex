@@ -6,37 +6,12 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/29 15:14:37 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:04:56 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-/* static void        system_exec(char *cmdtemplate)
- {
-         FILE* fp = popen(cmdtemplate, "r");
-         if (fp == NULL) {
-                 ft_putstr_fd("Error opening command", 2);
-                 ft_putstr_fd(cmdtemplate, 2);
-                 return ;
-         }
-         char output[1024];
-         size_t n = fread(output, 1, sizeof(output), fp);
-         output[n] = '\0';
-         ft_putstr_fd(output, 2);
- }
-static void exit_checks(void)
- {
-    char cmdtemplate[1024];
-    ft_putstr_fd("\n\n******************************************\n", 2);
-    ft_putstr_fd("Open fds:\n", 2);
-    sprintf(cmdtemplate, "lsof -p %d | grep CHR", getpid());
-    system_exec(cmdtemplate);
-    ft_putstr_fd("\nLeaks:\n", 2);
-    sprintf(cmdtemplate, "leaks %d", getpid());
-    system_exec(cmdtemplate);
-    ft_putstr_fd("******************************************\n", 2);
- } */
 /**
  * It reads from stdin until it finds the delimiter, then it writes everything 
  * it read to the pipe
@@ -51,7 +26,6 @@ void	put_hdc(char **argv, int *pipe_fd)
 	close(pipe_fd[0]);
 	write(1, "pipe heredoc> ", 14);
 	buf = get_next_line(STDIN_FILENO);
-	ft_putstr_fd(buf, pipe_fd[1]);
 	while (buf)
 	{
 		if ((ft_strncmp(buf, argv[2], ft_strlen(argv[2])) == 0)
@@ -61,8 +35,8 @@ void	put_hdc(char **argv, int *pipe_fd)
 			exit(0);
 		}
 		write(1, "pipe heredoc> ", 14);
-		ft_putstr_fd(buf, pipe_fd[1]);
 		buf = get_next_line(STDIN_FILENO);
+		ft_putstr_fd(buf, pipe_fd[1]);
 	}
 	free(buf);
 }
@@ -131,8 +105,6 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		exit_error(ARG_ERR, NULL, 1);
-	if ((ft_strlen(argv[argc - 2]) || ft_strlen(argv[argc - 3])) == '\0')
-		exit_error(COM_ERR, *argv, 127);
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
 		if (argc < 6)

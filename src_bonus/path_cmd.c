@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:05:36 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/29 15:31:12 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:06:03 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exec(char *cmd, char **envp)
 	if (execve(path_cmd, s_cmd, envp) == -1)
 	{
 		free(path_cmd);
-		free(s_cmd);
-		exit_error (COM_ERR, path_cmd, 127);
+		double_pointer_free(s_cmd);
+		exit (errno);
 	}
 }

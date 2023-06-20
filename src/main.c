@@ -6,37 +6,12 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/04/04 13:28:59 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:26:05 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-// static void        system_exec(char *cmdtemplate)
-//  {
-//          FILE* fp = popen(cmdtemplate, "r");
-//          if (fp == NULL) {
-//                  ft_putstr_fd("Error opening command", 2);
-//                  ft_putstr_fd(cmdtemplate, 2);
-//                  return ;
-//          }
-//          char output[1024];
-//          size_t n = fread(output, 1, sizeof(output), fp);
-//          output[n] = '\0';
-//          ft_putstr_fd(output, 2);
-//  }
-// static void exit_checks(void)
-//  {
-//     char cmdtemplate[1024];
-//     ft_putstr_fd("\n\n******************************************\n", 2);
-//     ft_putstr_fd("Open fds:\n", 2);
-//     sprintf(cmdtemplate, "lsof -p %d | grep CHR", getpid());
-//     system_exec(cmdtemplate);
-//     ft_putstr_fd("\nLeaks:\n", 2);
-//     sprintf(cmdtemplate, "leaks %d", getpid());
-//     system_exec(cmdtemplate);
-//     ft_putstr_fd("******************************************\n", 2);
-//  }
 /**
  * It checks if the command is in the current directory, if it is, it returns
  * the command, if it's not, it checks if the command is in the PATH, if it 
@@ -201,8 +176,6 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		exit_error(ARG_ERR, NULL, 1);
-	if ((ft_strlen(argv[2]) || ft_strlen(argv[3])) == '\0')
-		exit_error(COM_ERR, *argv, 127);
 	pipex.path = checkpath(envp);
 	if (pipe(pipex.fd_pipe) == -1)
 		exit_error(PIPE_ERR, NULL, errno);
