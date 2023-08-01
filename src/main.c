@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/23 12:26:05 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:49:30 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,3 +196,15 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(pipex.pid2, &pipex.status, 0);
 	return (WEXITSTATUS(pipex.status));
 }
+
+/* void	ft_leaks()
+{
+	system("leaks -q push_swap");
+	//!atexit(ft_leaks);
+	//!system("leaks push_swap");
+} */
+/* 	while (stack_a)
+	{
+		printf(ORANGE"Stack a: %li\n"RESET, stack_a->nbr);
+		stack_a = stack_a->next;
+	} */

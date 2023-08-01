@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:14:42 by crtorres          #+#    #+#             */
-/*   Updated: 2023/02/27 10:41:14 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:04:30 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@ char	*ft_get_line(char *stash)
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	str = malloc(sizeof(char) * (i + 1));
+	str = malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
+	{
+		str[i] = stash[i];
+		i++;
+	}
+	if (stash[i] == '\n')
 	{
 		str[i] = stash[i];
 		i++;
@@ -151,7 +156,7 @@ char	*get_next_line(int fd)
 	fd = 0;
 	if (fd == -1)
 		return (-1);
-	fd = open("map_bonus.ber", O_RDONLY);
+	fd = open("leer.txt", O_RDONLY);
 	line = "";
 	while (line != NULL)
 	{

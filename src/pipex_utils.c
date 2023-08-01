@@ -6,12 +6,19 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/23 11:56:06 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:07:16 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+/**
+ * The function `double_pointer_free` frees the memory allocated for a double
+ * pointer and its contents.
+ * 
+ * @param ptr The parameter `ptr` is a double pointer to a character, which 
+ * means it is a pointer to a pointer to a character.
+ */
 void	double_pointer_free(char **ptr)
 {
 	int	i;
@@ -25,6 +32,18 @@ void	double_pointer_free(char **ptr)
 	free (ptr);
 }
 
+/**
+ * The function "checkcommand_in_path" checks if a given command is present in 
+ * any of the directories specified in the "path" array.
+ * 
+ * @param path A double pointer to a char array, representing the list of
+ * directories in the system's PATH variable.
+ * @param command A string representing the command to be checked in the path.
+ * 
+ * @return a pointer to a character array (string) that represents the full 
+ * path of the command if it is found in one of the directories specified in 
+ * the `path` array. If the command is not found, the function returns NULL.
+ */
 char	*checkcommand_in_path(char **path, char *command)
 {
 	char	*fcmd;
