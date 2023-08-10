@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:05:36 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/22 18:06:03 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:58:50 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ char	*get_path(char *cmd, char **env)
  */
 void	exec(char *cmd, char **envp)
 {
-	char	**s_cmd;
-	char	*path_cmd;
+	char	**s_cmd = NULL;
+	char	*path_cmd = NULL;
 
+	if (access(cmd,X_OK) == 0)
+	{
+		path_cmd = get_path(s_cmd[0], envp);
+	}
+	if (!*envp)
+		exit_error(8, *envp, 127);
 	s_cmd = ft_split(cmd, ' ');
 	path_cmd = get_path(s_cmd[0], envp);
 	if (execve(path_cmd, s_cmd, envp) == -1)
 	{
-		free(path_cmd);
 		double_pointer_free(s_cmd);
 		exit (errno);
 	}
