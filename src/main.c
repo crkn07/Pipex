@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/04/26 11:49:30 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:34:36 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,21 +132,30 @@ static void	child2(char **path, char **argv, int *fd_pipe, char **envp)
  * 
  * @return a pointer to a pointer to a char.
  */
-char	**checkpath(char **envp)
+char	**checkpath(char **envp, char **argv)
 {
-	char	**path;
-	char	*tmp;
+	char	**path = NULL;
+	char	*tmp = NULL;
 	int		i;
+	int		j;
 
-	i = 0;
-	while (envp[i])
+	i = -1;
+	j = -1;
+	if (access(argv[2], X_OK) == 0)
+	{
+		tmp = ft_strdup(argv[2]);
+		j = 0;
+	}
+	if (!*envp && j != 0)
+			exit_error(7, *envp, 127);
+	while (!tmp && envp[++i])
 	{
 		if (envp[i][0] == 'P' && envp[i][1] == 'A'
 		&& envp[i][2] == 'T' && envp[i][3] == 'H')
 			break ;
-		i++;
 	}
-	tmp = ft_strtrim(envp[i], "PATH=");
+	if (!tmp)
+		tmp = ft_strtrim(envp[i], "PATH=");
 	path = ft_split(tmp, ':');
 	if (tmp)
 		free(tmp);
@@ -176,7 +185,9 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		exit_error(ARG_ERR, NULL, 1);
-	pipex.path = checkpath(envp);
+	pipex.path = checkpath(envp, argv);
+	/* for (int i = 0; pipex.path[i]; i++)
+		printf("path[%d] is %s\n",i, pipex.path[i]); */
 	if (pipe(pipex.fd_pipe) == -1)
 		exit_error(PIPE_ERR, NULL, errno);
 	pipex.pid1 = fork();
@@ -196,15 +207,3 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(pipex.pid2, &pipex.status, 0);
 	return (WEXITSTATUS(pipex.status));
 }
-
-/* void	ft_leaks()
-{
-	system("leaks -q push_swap");
-	//!atexit(ft_leaks);
-	//!system("leaks push_swap");
-} */
-/* 	while (stack_a)
-	{
-		printf(ORANGE"Stack a: %li\n"RESET, stack_a->nbr);
-		stack_a = stack_a->next;
-	} */

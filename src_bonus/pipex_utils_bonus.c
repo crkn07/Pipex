@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:25:38 by crtorres          #+#    #+#             */
-/*   Updated: 2023/03/23 12:06:51 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:31:41 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	exit_error(int err, char *msg, int errnum)
 		perror("command not found :");
 	else if (err == 7)
 		perror("here_doc error :");
+	else if (err == 8)
+		ft_putstr_fd("Command not found\n", 2);
 	exit (errnum);
 }
 

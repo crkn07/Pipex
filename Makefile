@@ -43,7 +43,6 @@ SRCS = $(addprefix $(SRC_PATH), $(SRC))
 SRCS_BONUS = $(addprefix $(SRC_B_PATH), $(SRC_B))
 
 OBJS = $(SRCS:%.c=%.o)
-OBJ_MAIN = $(SRCS_BONUS:%.c=%.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
@@ -68,8 +67,6 @@ clean:
 	$(PURPLE) CLEANING... $(RESET)
 	@rm -f $(OBJS) $(OBJS_BONUS)
 	@rm -rf $(DOT_O)
-	@rm -rf $(NAME)
-	@rm -rf $(NAME_BONUS)
 	$(PURPLE) CLEANING libft... $(RESET)
 	@make clean -C ./libft
 	$(GREEN) "CLEAN COMPLETE" $(RESET)

@@ -6,7 +6,7 @@
 /*   By: crtorres <crtorres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:56:23 by crtorres          #+#    #+#             */
-/*   Updated: 2023/07/28 17:04:20 by crtorres         ###   ########.fr       */
+/*   Updated: 2023/08/10 18:21:35 by crtorres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	put_hdc(char **argv, int *pipe_fd)
 	char	*buf;
 
 	close(pipe_fd[0]);
-	//printf("%d\n", *pipe_fd);
 	write(1, "pipe heredoc> ", 14);
 	buf = get_next_line(STDIN_FILENO);
 	while (buf)
 	{
-		ft_putstr_fd(buf, pipe_fd[1]);
-		if ((ft_strncmp(buf, argv[2], ft_strlen(argv[2])) == 0))
+		if ((ft_strncmp(buf, argv[2], ft_strlen(argv[2])) == 0)
+			&& (ft_strlen(buf) == ft_strlen(argv[2])))
 		{
 			free(buf);
 			exit(0);
 		}
 		write(1, "pipe heredoc> ", 14);
 		buf = get_next_line(STDIN_FILENO);
+		ft_putstr_fd(buf, pipe_fd[1]);
 	}
 	free(buf);
 }
@@ -51,20 +51,21 @@ void	here_doc(char **argv)
 {
 	int		pipe_fd[2];
 	pid_t	pid;
-	int		status;
+	int		*status;
 
 	if (pipe(pipe_fd) == -1)
 		exit(0);
 	pid = fork();
 	if (pid == -1)
 		exit(0);
+	status = 0;
 	if (pid == 0)
 		put_hdc(argv, pipe_fd);
 	else
 	{
 		close(pipe_fd[1]);
 		dup2(pipe_fd[0], STDIN_FILENO);
-		waitpid(pid, &status, 0);
+		waitpid(pid, status, 0);
 	}
 }
 
@@ -88,12 +89,14 @@ void	do_pipe(char *cmd, char **envp)
 	{
 		close(ppex.fd_pipe[0]);
 		dup2(ppex.fd_pipe[1], STDOUT_FILENO);
+		close(ppex.fd_pipe[1]);
 		exec(cmd, envp);
 	}
 	else
 	{
 		close(ppex.fd_pipe[1]);
 		dup2(ppex.fd_pipe[0], STDIN_FILENO);
+		close(ppex.fd_pipe[0]);
 	}
 }
 
@@ -121,6 +124,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (i < argc - 2)
 		do_pipe(argv[i++], envp);
+	//!printf("entra\n");
 	dup2(pipex.fd_out, STDOUT_FILENO);
 	exec(argv[argc - 2], envp);
 }
